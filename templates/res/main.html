@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main Page</title>
+    <style>
+        
+        @font-face {
+        font-family: 'SUITE-Regular';
+        src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Regular.woff2') format('woff2');
+        font-weight: 400;
+        font-style: normal;
+    }
+        body {
+            font-family:'SUITE-Regular'
+        }
+        .container {
+            font-family: 'SUITE-Regular';
+            font-weight: 100;
+            position: absolute;
+            top: 15%;
+            left: 33%;
+        }
+        .btns {
+            font-family: 'SUITE-Regular';
+            font-weight: 200;
+            width: 70px;
+            height: 30px;
+            border-radius: 30px;
+            border-color: rgb(214, 211, 211);
+            border-style: solid;
+            margin-right: 20px ;
+            transition-property: background-color;
+            transition-timing-function: ease-in;
+            transition-duration: 0.2s;
+            font-size: 1em;
+        }
+        .btns:hover {
+            background-color: black;
+            color: white;
+        }
+        .main_item {
+            width: 250px;
+            height: 250px;
+            display: inline-flex;
+            margin: 0;
+            background-color: rgb(195, 191, 191);
+            color: white;
+            justify-content: center;
+            align-items: center;
+            font-size: 2.5em;
+            transition-property: border-radius, background-color;
+            transition-timing-function: ease-in;
+            transition-duration: 0.5s;
+        }
+        .main_item:hover {
+            border-radius: 30%;
+            background-color: gray;
+        }
+        .main_item2 {
+            width: 250px;
+            height: 250px;
+            display: inline-flex;
+            margin-top: 5px;
+            background-color: rgb(206, 202, 202);
+            
+            color: white;
+            justify-content: center;
+            align-items: center;
+            font-size: 2.5em;
+            transition-property: border-radius, background-color;
+            transition-timing-function: ease-in;
+            transition-duration: 0.5s;
+        }
+        .main_item2:hover {
+            border-radius: 30%;
+            background-color: gray;
+        }
+        .logondiv {
+            margin-top: 3px;
+        }
+        input {
+            width:100px;
+            margin-right:5px;
+            margin-top: 5px;
+            border-radius: 5px;
+        }
+    </style>
+        
+   
+</head>
+<body>
+    
+    <div style="float: right;" class="logondiv">
+        
+        {% if userid %}
+        <button style="float: right;" class="btns" onclick="location.href='/res/logout/'">로그아웃</button>
+        <div class="logondiv" style="float: right; margin-right:10px;">
+            <span>안녕하세요 {{ userid }} 님</span>
+        </div>
+        {% else %}
+        <button style="float: right;" class="btns" onclick="location.href='/res/join/'" >회원가입</button>
+        <button style="float: right; margin-top: 0px;" class="btns" form="logon">로그인</button>
+        <form method='post' action="{% url 'res:logon' %}" id="logon" style="float: right;">
+            {% csrf_token %}
+            <label name="logonid">아이디:</label>
+            <input type="text" name="logonid">
+            <label name="logonpw">비밀번호:</label>
+            <input type="password" name="logonpw">
+       
+        </form>
+        {% endif %}
+    </div>
+    <!-- <button style="float: right;" class="btns" onclick="location.href='/res/index/'">글쓰기</button> -->
+    <br>
+    <div class="container">
+        <a onclick="location.href='/res/index/0/'"><div class="main_item">맛보다</div></a>
+        <div class="main_item">꾸미다</div></br>
+        <div class="main_item2">배우다</div>
+        <div class="main_item2">기타</div>
+    </div>
+</body>
+</html>

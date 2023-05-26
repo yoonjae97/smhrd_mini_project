@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block contents %}
+
+    
+  <form method = "post" action = "{% url 'res:write_save' %}" id="writepost">
+      {% csrf_token %}
+    <div class = "container mt-5">
+      <div  style='text-align:center; color:black;
+      background-color: #ccc; font-weight:1000; height: 60px; line-height: 65px;'>게시글 작성</div>
+      <div class="mb-3 mt-5">
+        <label for="title" class="form-label">상호명</label>
+        <input type="text" class="form-control" id="title" placeholder="name" name="title" required>
+      </div>
+
+      <div class="mb-3 mt-4">
+        <label for="title" class="form-label">위치</label>
+        <input type="text" class="form-control" id="title" placeholder="location" name="title" required>
+      </div>
+
+      <div class="mb-3 mt-4">
+        <label for="title" class="form-label">연락처</label>
+        <input type="text" class="form-control" id="title" placeholder="tel" name="title" required>
+      </div>
+      
+      <div class="mb-3 mt-3">
+        <label for="title" class="form-label">내용</label>
+        <textarea class="form-control" rows="10" id="contents" name="contents" ></textarea></br>
+      </div>
+
+    </div>
+  </form>
+  <button class="btn btn-secondary" id="btnWrite" style="float: right; margin: 10px;" form="writepost">저장</button>
+  <button class="btn btn-secondary" id="btnWrite" style="float: right; margin: 10px;">사진 첨부</button>
+
+{% endblock %}

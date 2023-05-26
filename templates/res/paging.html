@@ -1,0 +1,27 @@
+
+
+
+<div class = "container mt-5">
+    <ul class="pagination justify-content-center">
+        <li class="page-item"><a class="page-link text-dark" href="javascript:goPage(0)">First</a></li>
+        {% if commonPage.isPrev %}
+            <li class="page-item"><a class="page-link text-dark" href="javascript:goPage({{commonPage.pre_page}})">Previous</a></li>
+        {% endif %}
+
+        {% for pg in commonPage.page_range %}
+            {% if pg == commonPage.curPage %}
+                <li class="page-item active" id="paging"><a class="page-link text-dark" href=javascript:goPage({{pg}}) style="border-color: gray; background-color: rgb(146, 147, 144)" ;>{{pg|add:1}}</a></li>
+            {% else %}
+                <li class="page-item"><a class="page-link text-dark" href="javascript:goPage({{pg}})">{{pg|add:1}}</a></li>
+            
+            {% endif %}
+        {%endfor%}
+        
+        
+        {% if commonPage.isNext %}
+            <li class="page-item"><a class="page-link text-dark" href="javascript:goPage({{commonPage.next_page}})">Next</a></li>
+        {% endif %}
+
+        <li class="page-item"><a class="page-link text-dark" href="javascript:goPage({{commonPage.totalPage}})">Last</a></li>
+    </ul>
+</div>

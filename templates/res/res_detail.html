@@ -1,0 +1,143 @@
+{% extends 'base.html' %}
+{% block contents %}  
+  
+  <div style="float: right; margin: 10px;" class="logondiv">
+              
+    {% if userid %}
+    <button style="float: right;" class="btns" onclick="location.href='/res/logout/'">로그아웃</button>
+    <div class="logondiv" style="float: right; margin-right:10px;">
+        <span>안녕하세요 {{ userid }} 님</span>
+    </div>
+    {% else %}
+    
+    
+    <form method='post' action="{% url 'res:logon' %}" id="logon" style="float: right;">
+        {% csrf_token %}
+        <label name="logonid">아이디</label>
+        <input type="text" name="logonid" >
+        <label name="logonpw">비밀번호</label>
+        <input type="password" name="logonpw" >
+        <button style="float: right; margin: 5px;" class="btns" form="logon" >로그인</button>
+        <button style="float: right;" class="btns" onclick="location.href='/res/join/'" ;>회원가입</button>
+    </form>
+    
+    {% endif %}
+  </div>
+    
+        <table class="eDetail">
+          
+        <div>
+            <tbody>
+                <tr>
+                    <h1 style="text-align: center; margin-top: 90px;">{{resInfo.res_name}}</h1>
+                </tr>
+                <tr style="justify-content: center;">
+                  <th>작성일</th>
+                  <td>{{resInfo.res_wdate}}</td>
+                  <th>조회수</th>
+                  <td>{{resInfo.res_hit}}</td></br>x`
+                  <th>위치</th>
+                  <td>{{resInfo.res_locate}}</td>
+                  <th>가격</th>
+                  <td colspan="5">{{resList.res_item_price}}</td>
+                </tr>
+                <tr>
+                  
+                  <td colspan="5">{{resList.res_item_content|linebreaks}}</td>
+                  <td colspan="5">{{resList.res_item_pic|linebreaks}}</td>
+                  <!-- 이미지 데이터나 소개 -->
+                  
+                </tr>
+               
+            </tbody>
+
+          
+        </table>
+    </div>
+    
+    <div class="container p-2 mt-5 border" >
+        <table class="eReview"style="justify-content: center;">
+                <th style="font-size: 1em;">메뉴</th>
+              {% for menuItem in menuList %}
+                <tr>
+                <th>음식 메뉴</th>
+                <td>{{menuItem.res_item_title}}</td>
+                <th>음식 소개</th>
+                <td>{{menuItem.res_item_content}}</td>
+                <th>음식 가격</th>
+                <td>{{menuItem.res_item_price}}</td>
+                </tr>
+              {% endfor %}
+        </table>
+
+    </div>
+
+    <div class="container p-5 mt-5 border">
+        <div class="review" style="margin-left: 200px;">
+          <td><input type="text" class="res_review_title" placeholder="한줄평" style="width: 715px;margin-right: 18px;"></td>
+          <th>별점</th>
+          <td>
+            <select name="score">
+                <option value="1">1점</option>
+                <option value="2">2점</option>
+                <option value="3">3점</option>
+                <option value="4">4점</option>
+                <option value="5">5점</option>
+            </select></br>
+          </td>
+            <br>
+          <tr>
+              <textarea class="form-control" id="res_review_content" name="review" style="border-style: solid; border-color: dimgray;"></textarea>
+              <br>
+              <button type="button" class="btn btn-sm bg-secondary btn-outline-dark text-bg-dark" id="btnList" style="float: right;">등록</button>
+            </tr>
+         </div>
+
+        <div class="container p-2 mt-5 border" >
+            <table class="eReview"style="justify-content: center;">
+                  {% for review in reviewList %}
+                    <th style="font-size: 1em;">후기</th>
+                    <tr>
+                    <th>작성자</th>
+                    <td>{{review.mem_id}}</td>
+                    <th>작성일</th>
+                    <td>{{review.res_review_wdate}}</td>
+                    <th>별점</th>
+                    <td>{{review.res_review_rating}}</td>
+                    <td colspan="5">{{review.res_review_content}}</td>
+                    </tr>
+                  {% endfor %}
+            </table>
+                  <!-- 리뷰 페이징: 자바스크립트로 다음 페이지가 보이게?(class name에 붙여서) -->
+        </div>
+    
+
+    </div>
+    
+    <div class = "container mt-5" style = "text-align: right">    
+          <button type="button" class="btn btn-primary bg-secondary btn-outline-dark text-bg-dark" id="btnList">목록</button>
+          {% if memseq == resInfo.mem_seq %}
+          <button class="btn btn-primary bg-secondary btn-outline-dark text-bg-dark" onclick="location.href='/res/deletepost/'; alert('게시글이 삭제되었습니다.')">게시글 삭제</button>
+          {% endif %}
+      </div>
+          
+<script>
+    
+  function goReview(pg)
+  {
+    
+    location.href="/res/index/"+pg;
+
+
+  }
+$(document).ready( () => {
+  $("#btnReview").click(() => {
+    
+    // $("#myform").prop("action", "/res/write");
+    $("#myform").prop("method", "post");
+    $("#myform").submit();
+  });
+})
+</script>
+
+{% endblock %}

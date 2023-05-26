@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% block contents %}
+
+    <form method="POST" action="{% url 'res:join_save' %}" id="signup">
+        <fieldset>
+      {% csrf_token %}
+      <input type="hidden" name="idcheckyn" id="idcheckyn" value="N" >
+      <div class="container mt-5">
+    
+        <div class="mb-3 mt-3">
+          <label for="title" class="form-label" name="mem_id">사용자아이디:</label>
+          <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Enter ID" name="mem_id"  id="mem_id">
+            <button class="btn btn-secondary" type="button" id="btnIdCheck">중복체크</button>
+          </div>
+        </div>
+
+        <div class="mb-3 mt-3">
+          <label for="pwd" class="form-label">비밀번호:</label>
+          <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pwd" required>
+        </div>
+        
+        <div class="mb-3 mt-3">
+          <label for="pwd2" class="form-label">비밀번호 확인:</label>
+          <input type="password" class="form-control" id="pwd2" placeholder="Enter password" name="pwd2" required>
+        </div>
+
+        <div class="mb-3 mt-3">
+          <label for="name" class="form-label">사용자이름:</label>
+          <input type="text" class="form-control" id="mem_name" placeholder="Enter username" name="name" required>
+        </div>
+                      
+          <div>회원유형</div>
+          <label name="membertype">개인회원</label>
+          <input type="radio" name="membertype" value="1" checked="checked">
+          <label name="membertype">사장님회원</label>
+          <input type="radio" name="membertype" value="2" onclick='return(false);'>      
+
+
+        <div class="mb-3 mt-3">
+          <label for="age" class="form-label">회원나이:</label>
+          <input type="number" class="form-control" id="mem_age" placeholder="Enter age" name="age" required>
+        </div>
+
+      </div>
+    </fieldset>
+
+    </form>
+
+    <div>
+        <button class="btn btn-secondary" style="width:100px; float: right; margin-right: 150px;" form="signup">회원가입</button>
+        <button class="btn btn-secondary" style="width:130px; float: right; margin-right: 5px;" onclick="location.href='/res/main/'">메인으로 이동</button>
+    </div>
+
+{%endblock%}
